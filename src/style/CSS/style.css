@@ -1,8 +1,41 @@
+.track-cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.track-card {
+  width: 29%;
+  list-style: none;
+  cursor: pointer;
+}
+.track-card img {
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #1b1424;
   color: whitesmoke;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
-
-p {
+body main {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+body h1 {
+  padding: 3% 0;
+}
+body figure {
+  margin-bottom: 5%;
+}
+body p {
   color: pink;
 }/*# sourceMappingURL=style.css.map */

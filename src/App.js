@@ -5,7 +5,9 @@ import './style/CSS/style.css'
 function App() {
   return (
     <Fragment >
-      <Blindtest />
+      <main>
+        <Blindtest />
+      </main>
     </Fragment>
   );
 }

@@ -1,0 +1,13 @@
+
+.track-cards {
+    display: flex;
+    justify-content: space-around;
+}
+.track-card {
+    width: 29%;
+    list-style: none;
+    cursor: pointer;
+    img {
+        width: 100%;
+    }
+}

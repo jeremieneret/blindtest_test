@@ -10,7 +10,7 @@ const Blindtest = () => {
     const randomId = randomInteger(0, 9);
     const randomId2 = randomInteger(0, 9);
     const randomId3 = randomInteger(0, 9);
-    const [randomTrack, setRandomTrack] = useState('')
+    const [goodAnswerTrack, setGoodAnswerTrack] = useState('')
     const [badAnswerTrack1, setBadAnswerTrack1] = useState('')
     const [badAnswerTrack2, setBadAnswerTrack2] = useState('')
     const [goodCover, setGoodCover] = useState('');
@@ -23,7 +23,7 @@ const Blindtest = () => {
                 'https://api.deezer.com/chart/85'
             )
                 .then(res => {
-                    setRandomTrack(res.data.tracks.data[randomId])
+                    setGoodAnswerTrack(res.data.tracks.data[randomId])
                     setGoodCover(res.data.tracks.data[randomId].album.cover)
                     setBadCover(res.data.tracks.data[randomId2].album.cover)
                     setBadCover2(res.data.tracks.data[randomId3].album.cover)
@@ -42,7 +42,7 @@ const Blindtest = () => {
 
     const randomTracks = [
         {
-            track: randomTrack,
+            track: goodAnswerTrack,
             cover: goodCover
         },
         {
@@ -65,7 +65,7 @@ const Blindtest = () => {
             {loading &&
                 <p>loading...</p>
             }
-            {randomTrack &&
+            {goodAnswerTrack &&
                 <Fragment>
                     <h1>
                         BLINDTEST!
@@ -73,19 +73,19 @@ const Blindtest = () => {
                     {loading &&
                         <p>loading...</p>
                     }
-                    {randomTrack &&
+                    {randomTracks &&
                         <RandomTrackPreview
                             track={{
-                                preview: randomTrack.preview
+                                preview: randomTracks.preview
                             }}
                         />
                     }
                     {shuffledTracks &&
-                        <ul>
+                        <ul className='track-cards'>
                             {
                                 shuffledTracks.map((track, i) => {
                                     return (
-                                        <li key={i}>
+                                        <li className='track-card' key={i}>
                                             <img src={track.cover} alt="cover" />
                                             <p>{track.track.title}</p>                                          
                                         </li>

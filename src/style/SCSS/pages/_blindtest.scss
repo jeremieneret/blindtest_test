@@ -1,10 +1,32 @@
 @use '../components/' as *;
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background: #1b1424;
     color: whitesmoke;
-}
+    display: flex;
+    text-align: center;
+    justify-content: center;
 
-p {
-    color: pink;
+    main {
+        max-width: 1000px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    h1 {
+        padding: 3% 0;
+    }
+
+    figure {
+        margin-bottom: 5%;
+    }
+    
+    p {
+        color: pink;
+    }
 }
