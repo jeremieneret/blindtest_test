@@ -7,7 +7,12 @@ const TrackCard = ({ track, handleChange }) => {
                 <img src={track.cover} alt="cover" />
                 <div className="answer-area">
                     <label htmlFor={track.title}>
-                        <input type="radio" id={track.title} name='choices' value={track.title} onChange={handleChange} />
+                        <input
+                            type="radio"
+                            id={track.title}
+                            name='choices'
+                            value={track.title}
+                            onChange={handleChange} />
                         {track.title}
                     </label>
                 </div>

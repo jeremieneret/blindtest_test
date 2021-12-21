@@ -32,7 +32,7 @@ const Blindtest = () => {
     const [badCover1, setBadCover1] = useState('');
     const [badCover2, setBadCover2] = useState('');
 
-    //we fetch the first api to get the track that will in the player and obviously that will be one of the three possibilities of answers
+    //we fetch the first api to get the track that will be played and will be one of the three possibilities of answers
     //we use the first id of our "shuffledApiGenreIds" array
     useEffect(() => {
         const fetchGoodTrack = async () => {
@@ -117,10 +117,13 @@ const Blindtest = () => {
     return (
         <Fragment>
             <div className={display}>
+
                 <AppTitle />
+
                 {loading &&
                     <p>loading...</p>
                 }
+
                 {goodAnswerTrack &&
                     <RandomTrackPreview
                         track={{
@@ -129,6 +132,7 @@ const Blindtest = () => {
                         }}
                     />
                 }
+
                 {shuffledTracks &&
                     <ul className='track-cards'>
                         {
@@ -151,7 +155,9 @@ const Blindtest = () => {
                         }
                     </ul>
                 }
+
             </div>
+
             {result &&
                 <div>
                     <h1>{result}</h1>
