@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const ThreeChoices = () => {
+const TrackCard = () => {
     return (
         <div>
             <h2>
@@ -12,5 +12,5 @@ const ThreeChoices = () => {
     )
 }
 
-export default ThreeChoices
+export default TrackCard
 

@@ -1,19 +1,21 @@
-// Une preview du son est affichée.
+import React, { Fragment } from 'react'
 
-import GetRandomTrack from './GetRandomTrack'
 
-import React from 'react'
+const RandomTrackPreview = (track) => {
 
-const RandomTrackPreview = () => {
+
     return (
-        <div>
-            <GetRandomTrack />
-            <h2>
-                Une preview du son est affichée.
-            </h2>
-        </div>
+        <Fragment>
+            <figure>
+                <audio
+                    controls
+                    src={track.preview}>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </figure>
+        </Fragment>
     )
 }
 
 export default RandomTrackPreview
-
