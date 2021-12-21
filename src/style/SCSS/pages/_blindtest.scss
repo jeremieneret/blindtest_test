@@ -12,11 +12,13 @@ body {
     display: flex;
     text-align: center;
     justify-content: center;
+    height: 100vh;
 
     main {
         max-width: 1000px;
         width: 100%;
-        margin: 0 auto;
+        margin: auto;
+        transform: translateY(calc(50vh - 50%));
     }
     h1 {
         padding: 3% 0;
@@ -29,4 +31,8 @@ body {
     p {
         color: pink;
     }
+}
+
+.display-none {
+    display: none;
 }

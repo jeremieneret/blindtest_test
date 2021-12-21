@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 
-const RandomTrackPreview = (track) => {
+const RandomTrackPreview = ({ track }) => {
 
 
     return (
@@ -9,7 +9,9 @@ const RandomTrackPreview = (track) => {
             <figure>
                 <audio
                     controls
-                    src={track.preview}>
+                    src={track.preview}
+                    title={track.title}
+                >
                     Your browser does not support the
                     <code>audio</code> element.
                 </audio>
