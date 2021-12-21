@@ -1,31 +1,39 @@
 import axios from 'axios'
-import React, { Fragment, useEffect, useState } from 'react'
+import AppTitle from '../components/AppTitle';
 import NewGameButton from '../components/NewGameButton';
-import RandomTrackPreview from '../components/RandomTrackPreview';
-import TrackCard from '../components/TrackCard';
-import { shuffle } from '../functions/shuffle';
+import React, { Fragment, useEffect, useState } from 'react'
 import { randomInteger } from '../functions/randomInteger';
-import {shuffledApiGenreIds} from '../utils/apiGenreIds'
+import RandomTrackPreview from '../components/RandomTrackPreview';
+import { shuffle } from '../functions/shuffle';
+import { shuffledApiGenreIds } from '../utils/apiGenreIds';
+import TrackCard from '../components/TrackCard';
 
 const Blindtest = () => {
 
-
+    //will display "loading" when loading
     const [loading, setLoading] = useState(true);
+    //will set result as right or wrong
     const [result, setResult] = useState('')
+    //will handle the display of the elements we won't need after the user clicks on his answer
     const [display, setDisplay] = useState('')
 
+    //here we create 3 random ids between 0 and 9, since we have 10 tracks in each array we will use
     const randomId = randomInteger(0, 9);
     const randomId2 = randomInteger(0, 9);
     const randomId3 = randomInteger(0, 9);
 
+    //we create three kinds of tracks : one is the good answer, the two other are wrong, using useState to manage their states
     const [goodAnswerTrack, setGoodAnswerTrack] = useState('')
     const [badAnswerTrack1, setBadAnswerTrack1] = useState('')
     const [badAnswerTrack2, setBadAnswerTrack2] = useState('')
 
+    //we need to use useState also for the covers, without it, it would cause two many renders because this data is less accessible than the others
     const [goodCover, setGoodCover] = useState('');
     const [badCover1, setBadCover1] = useState('');
     const [badCover2, setBadCover2] = useState('');
 
+    //we fetch the first api to get the track that will in the player and obviously that will be one of the three possibilities of answers
+    //we use the first id of our "shuffledApiGenreIds" array
     useEffect(() => {
         const fetchGoodTrack = async () => {
             await axios.get(
@@ -42,6 +50,8 @@ const Blindtest = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //the next two "useEffect" are doing the same that the first one, but for the wrong results
+    //we use different indexes of "shuffledApiGenreIds" to avoid duplicates
     useEffect(() => {
         const fetchBadTrack1 = async () => {
             await axios.get(
@@ -74,6 +84,7 @@ const Blindtest = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //we create an array of objects which contains the tracks and covers variable for each case
     const randomTracks = [
         {
             track: goodAnswerTrack,
@@ -89,8 +100,11 @@ const Blindtest = () => {
         }
     ];
 
+    //then we shuffle the elements of this array and declare it as a new variable
     const shuffledTracks = shuffle(randomTracks);
 
+    //when the user clicks on the answer he has chosen, we set results by displaying a message
+    //we also want this element and the restart button to be the only ones on the screen, so we add a class "display-none", who does what its name says :)
     const handleChange = (e) => {
         if (e.target.value === goodAnswerTrack.title) {
             setResult('Yes! You know your classics!')
@@ -102,17 +116,11 @@ const Blindtest = () => {
 
     return (
         <Fragment>
-            {loading &&
-                <p>loading...</p>
-            }
-
-            <h1>
-                BLINDTEST!
-            </h1>
-            {loading &&
-                <p>loading...</p>
-            }
             <div className={display}>
+                <AppTitle />
+                {loading &&
+                    <p>loading...</p>
+                }
                 {goodAnswerTrack &&
                     <RandomTrackPreview
                         track={{

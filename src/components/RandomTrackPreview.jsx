@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 
-
 const RandomTrackPreview = ({ track }) => {
-
 
     return (
         <Fragment>
