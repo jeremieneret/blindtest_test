@@ -7,6 +7,7 @@ const RandomTrackPreview = ({ track }) => {
             <figure>
                 <audio
                     controls
+                    autoPlay
                     src={track.preview}
                     title={track.title}
                 >
