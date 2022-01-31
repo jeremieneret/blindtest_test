@@ -32,30 +32,56 @@ const Blindtest = () => {
     const [badCover1, setBadCover1] = useState('');
     const [badCover2, setBadCover2] = useState('');
 
-    const fetchData = () => {
-        const GOOD_ANSWER_TRACK_API = `https://api.deezer.com/chart/${shuffledApiGenreIds[0]}`;
-        const BAD_ANSWER_TRACK_1_API = `https://api.deezer.com/chart/${shuffledApiGenreIds[1]}`;
-        const BAD_ANSWER_TRACK_2_API = `https://api.deezer.com/chart/${shuffledApiGenreIds[2]}`
+    //we fetch the first api to get the track that will be played and will be one of the three possibilities of answers
+    //we use the first id of our "shuffledApiGenreIds" array
+    useEffect(() => {
+        const fetchGoodTrack = () => {
+            axios.get(
+                `https://api.deezer.com/chart/${shuffledApiGenreIds[0]}`
+            )
+                .then(res => {
+                    setGoodAnswerTrack(res.data.tracks.data[randomId])
+                    setGoodCover(res.data.tracks.data[randomId].album.cover_medium)
 
-        const getGoodAnswerTrack = axios.get(GOOD_ANSWER_TRACK_API);
-        const getBadAnswerTrack1 = axios.get(BAD_ANSWER_TRACK_1_API);
-        const getBadAnswerTrack2 = axios.get(BAD_ANSWER_TRACK_2_API);
+                    setLoading(false)
+                })
+        }
+        fetchGoodTrack();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-        axios.all([getGoodAnswerTrack, getBadAnswerTrack1, getBadAnswerTrack2])
-        .then(axios.spread((...allData) => {
-            setLoading(false);
-            setGoodAnswerTrack(allData[0].data.tracks.data[randomId]);
-            setGoodCover(allData[0].data.tracks.data[randomId].album.cover_medium)
-            setBadAnswerTrack1(allData[1].data.tracks.data[randomId2]);
-            setBadCover1(allData[1].data.tracks.data[randomId2].album.cover_medium)
-            setBadAnswerTrack2(allData[2].data.tracks.data[randomId3]);
-            setBadCover2(allData[2].data.tracks.data[randomId3].album.cover_medium)
+    //the next two "useEffect" are doing the same that the first one, but for the wrong results
+    //we use different indexes of "shuffledApiGenreIds" to avoid duplicates
+    useEffect(() => {
+        const fetchBadTrack1 = () => {
+            axios.get(
+                `https://api.deezer.com/chart/${shuffledApiGenreIds[1]}`
+            )
+                .then(res => {
+                    setBadAnswerTrack1(res.data.tracks.data[randomId2])
+                    setBadCover1(res.data.tracks.data[randomId2].album.cover_medium)
 
-        }))
-    }
+                    setLoading(false)
+                })
+        }
+        fetchBadTrack1();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
-        fetchData()
+        const fetchBadTrack2 = () => {
+            axios.get(
+                `https://api.deezer.com/chart/${shuffledApiGenreIds[2]}`
+            )
+                .then(res => {
+                    setBadAnswerTrack2(res.data.tracks.data[randomId3])
+                    setBadCover2(res.data.tracks.data[randomId3].album.cover_medium)
+
+                    setLoading(false)
+                })
+        }
+        fetchBadTrack2();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //we create an array of objects which contains the tracks and covers variable for each case
